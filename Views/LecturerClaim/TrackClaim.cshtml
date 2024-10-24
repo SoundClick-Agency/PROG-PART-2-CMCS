@@ -1,0 +1,147 @@
+﻿@model ClaimListResultModel
+
+@{
+    ViewBag.Title = "Track Claims";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center text-gradient font-weight-bold">Track Submitted Claims</h2>
+
+    <div class="table-responsive shadow-lg rounded-lg bg-white">
+        <table class="table table-striped table-hover">
+            <thead class="thead-gradient text-white">
+                <tr>
+                    <th class="text-center">Hours Worked</th>
+                    <th class="text-center">Hourly Rate</th>
+                    <th class="text-center">Payout Requested</th>
+                    <th class="text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model.LecturerClaims)
+                {
+                    <tr>
+                        <td class="text-center">@claim.HoursWorked</td>
+                        <td class="text-center">R @claim.HourlyRate</td>
+                        <td class="text-center">R @claim.ExpectedPayout</td>
+                        <td class="text-center">
+                            @if (claim.Status == "Approved")
+                            {
+                                <span class="badge badge-success"><i class="fas fa-check-circle mr-1"></i>Approved</span>
+                            }
+                            else if (claim.Status == "Pending")
+                            {
+                                <span class="badge badge-warning"><i class="fas fa-clock mr-1"></i>Pending</span>
+                            }
+                            else if (claim.Status == "Rejected")
+                            {
+                                <span class="badge badge-danger"><i class="fas fa-times-circle mr-1"></i>Rejected</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-secondary">@claim.Status</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}
+
+<!-- Updated Styles -->
+<style>
+    /* Container Styles */
+    .container {
+        max-width: 1000px;
+    }
+
+    /* Table Container */
+    .table-responsive {
+        border-radius: 12px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    /* Table Header */
+    .thead-gradient {
+        background: linear-gradient(90deg, #004085 0%, #007bff 100%); /* Blue gradient */
+    }
+
+    /* Table Style */
+    .table {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+        .table th, .table td {
+            vertical-align: middle;
+            padding: 1rem;
+        }
+
+    /* Badge Style */
+    .badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        border-radius: 12px;
+    }
+
+    /* Badge Colors */
+    .badge-success {
+        background-color: #28a745; /* Green */
+        color: white;
+    }
+
+    .badge-warning {
+        background-color: #ffc107; /* Yellow-Orange */
+        color: black;
+    }
+
+    .badge-danger {
+        background-color: #dc3545; /* Red */
+        color: white;
+    }
+
+    .badge-secondary {
+        background-color: #6c757d; /* Dark Grey */
+        color: white;
+    }
+
+    /* Table Row Hover Effect */
+    .table-hover tbody tr:hover {
+        background-color: #e2eafc; /* Light Blue */
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    /* Text Gradient */
+    .text-gradient {
+        background: -webkit-linear-gradient(45deg, #004085, #007bff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Table Header Alignment */
+    .table th, .table td {
+        text-align: center;
+    }
+
+    /* Shadow Style */
+    .shadow-lg {
+        box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
+    }
+
+    /* Additional Styles for Font and Background */
+    body {
+        background-color: #f2f7ff; /* Soft blue background */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Professional font */
+    }
+
+    h2 {
+        color: #0056b3; /* Darker blue for heading */
+    }
+</style>

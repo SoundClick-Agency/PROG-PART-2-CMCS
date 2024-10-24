@@ -1,0 +1,198 @@
+﻿@model ClaimListResultModel
+@{
+    ViewBag.Title = "Approve or Reject Claims";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-gradient font-weight-bold">Approve or Reject Claims</h2>
+
+    <div class="table-responsive shadow-lg rounded-lg bg-white">
+        <table class="table table-striped table-hover" id="claimsTable">
+            <thead class="thead-gradient text-white">
+                <tr>
+                    <th class="text-center">Lecturer ID</th>
+                    <th class="text-center">Hours Worked</th>
+                    <th class="text-center">Supporting Document</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var claim in Model.LecturerClaims)
+                {
+                    <tr id="claim-@claim.ClaimId">
+                        <td class="text-center">@claim.LecturerId</td>
+                        <td class="text-center">@claim.HoursWorked</td>
+                        <td class="text-center">
+                            <button class="btn btn-info btn-sm" onclick="downloadSupportingDocuments('@claim.ClaimId')">
+                                <i class="fas fa-download mr-1"></i> Download
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-success btn-sm mr-2" onclick="processClaim('@claim.ClaimId', 'approve')">
+                                <i class="fas fa-check mr-1"></i> Approve
+                            </button>
+                            <button class="btn btn-danger btn-sm" onclick="processClaim('@claim.ClaimId', 'reject')">
+                                <i class="fas fa-times mr-1"></i> Reject
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        function processClaim(claimId, action) {
+            if (confirm('Are you sure you want to ' + action + ' this claim?')) {
+                $.ajax({
+                    url: '@Url.Action("ProcessClaim", "ClaimApproval")',
+                    type: 'POST',
+                    data: {
+                        claimId: claimId,
+                        action: action
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            // Visual indication for approved/rejected claims
+                            let row = document.getElementById('claim-' + claimId);
+                            if (action === 'approve') {
+                                row.style.backgroundColor = '#d1ecf1';
+                                row.style.color = '#0c5460';
+                            } else {
+                                row.style.backgroundColor = '#f8d7da';
+                                row.style.color = '#721c24';
+                            }
+                            alert('Claim has been ' + (action === 'approve' ? 'approved' : 'rejected') + ' successfully.');
+                        } else {
+                            alert('Failed to ' + action + ' the claim. Please try again.');
+                        }
+                    },
+                    error: function () {
+                        alert('An error occurred while processing the claim. Please try again.');
+                    }
+                });
+            }
+        }
+
+        function downloadSupportingDocuments(claimId) {
+            var form = $('<form>', {
+                action: '@Url.Action("GetDocuments", "ClaimApproval")',
+                method: 'POST'
+            }).append($('<input>', {
+                type: 'hidden',
+                name: 'claimId',
+                value: claimId
+            }));
+
+            $('body').append(form);
+            form.submit();
+            form.remove();
+        }
+    </script>
+}
+
+<!-- Enhanced Styles -->
+<style>
+    /* Container Styles */
+    .container {
+        max-width: 1000px;
+    }
+
+    /* Table Container */
+    .table-responsive {
+        border-radius: 12px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    /* Table Header */
+    .thead-gradient {
+        background: linear-gradient(90deg, #1e3a5f 0%, #1c4d8c 100%); /* Darker blue gradient */
+    }
+
+    /* Table Style */
+    .table {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+        .table th, .table td {
+            vertical-align: middle;
+            padding: 1rem;
+        }
+
+    /* Button Styles */
+    .btn {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-info {
+        background-color: #006699; /* Deeper blue */
+        border: none;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #005f73; /* Teal */
+        border: none;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #8b0000; /* Dark red */
+        border: none;
+        color: white;
+    }
+
+    /* Hover effects for buttons */
+    .btn-info:hover {
+        background-color: #004d66; /* Even darker blue */
+    }
+
+    .btn-success:hover {
+        background-color: #004c5c; /* Darker teal */
+    }
+
+    .btn-danger:hover {
+        background-color: #600000; /* Darker red */
+    }
+
+    /* Subtle hover effect for rows */
+    .table-hover tbody tr:hover {
+        background-color: #e0ebf5; /* Light blue */
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    /* Text Gradient */
+    .text-gradient {
+        background: -webkit-linear-gradient(45deg, #1e3a5f, #1c4d8c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Centered alignment for table headers */
+    .table th, .table td {
+        text-align: center;
+    }
+
+    /* Shadow Style */
+    .shadow-lg {
+        box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.1);
+    }
+
+    /* Additional Styles for Font and Background */
+    body {
+        background-color: #f0f4f8; /* Soft blue-grey background for the entire page */
+        font-family: Arial, sans-serif; /* Clean, professional font */
+    }
+
+    h2 {
+        color: #1e3a5f; /* Dark blue color for the heading */
+    }
+</style>

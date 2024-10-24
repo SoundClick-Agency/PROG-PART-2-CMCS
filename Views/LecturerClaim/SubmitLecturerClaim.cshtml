@@ -1,0 +1,151 @@
+﻿@model LecturerClaimRequest
+
+@{
+    ViewBag.Title = "Submit Claim";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-5 mb-5 bg-dark rounded-lg border-0">
+        <h2 class="mb-4 text-gradient font-weight-bold">Submit Claim for Hours Worked</h2>
+        <p class="text-muted text-center">Please fill in the form to submit your claim for approval. Ensure all fields are correctly filled and documents are uploaded.</p>
+
+        <form asp-action="Index" asp-controller="LecturerClaim" enctype="multipart/form-data" method="post">
+            <!-- Hours Worked -->
+            <div class="form-group">
+                <label for="HoursWorked">
+                    <i class="fas fa-clock mr-2 text-primary"></i>Hours Worked
+                </label>
+                <input asp-for="HoursWorked" class="form-control custom-input" placeholder="Enter hours worked" />
+                <span asp-validation-for="HoursWorked" class="text-danger"></span>
+            </div>
+
+            <!-- Hourly Rate -->
+            <div class="form-group">
+                <label for="HourlyRate">
+                    <i class="fas fa-money-bill-wave mr-2 text-success"></i>Hourly Rate
+                </label>
+                <input asp-for="HourlyRate" class="form-control custom-input" placeholder="Enter hourly rate" />
+                <span asp-validation-for="HourlyRate" class="text-danger"></span>
+            </div>
+
+            <!-- Selected Documents Display -->
+            <div class="form-group">
+                <label>
+                    <i class="fas fa-file-alt mr-2 text-secondary"></i>Selected Documents
+                </label>
+                <div class="form-control bg-light shadow-sm selected-files" id="selectedFiles"></div>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+                <label for="SupportingDocuments">
+                    <i class="fas fa-upload mr-2 text-warning"></i>Supporting Documents
+                </label>
+                <div class="custom-file">
+                    <input type="file" id="fileUpload" name="SupportingDocuments" class="custom-file-input" multiple />
+                    <label class="custom-file-label" for="fileUpload">Choose files...</label>
+                </div>
+                <span asp-validation-for="SupportingDocuments" class="text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-gradient btn-block mt-4">
+                <i class="fas fa-paper-plane mr-2"></i>Submit Claim
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('fileUpload').addEventListener('change', function (event) {
+            var files = event.target.files;
+            var output = document.getElementById('selectedFiles');
+            output.innerHTML = ''; // Clear the file list before displaying new files
+            for (var i = 0; i < files.length; i++) {
+                var fileItem = document.createElement('span');
+                fileItem.textContent = files[i].name;
+                fileItem.classList.add('badge', 'badge-primary', 'mr-2', 'mb-2', 'p-2');
+                output.appendChild(fileItem);
+            }
+            // Update the label of the file input
+            var fileInputLabel = document.querySelector('.custom-file-label');
+            fileInputLabel.textContent = files.length + ' file(s) selected';
+        });
+    </script>
+}
+
+<!-- Updated Styles -->
+<style>
+    /* Container for the Form */
+    .container {
+        max-width: 700px;
+    }
+
+    /* Card Style */
+    .card {
+        border-radius: 12px;
+        border: none;
+        background-color: #f8f9fa; /* Light grey background for card */
+    }
+
+    /* Custom Input Style */
+    .custom-input {
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: 2px solid #1a73e8; /* Blue border */
+    }
+
+    /* Button Gradient */
+    .btn-gradient {
+        background: linear-gradient(90deg, #005f99 0%, #003f5f 100%); /* Blue gradient */
+        color: #ffffff;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        padding: 0.75rem 1.5rem;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .btn-gradient:hover {
+            background: linear-gradient(90deg, #004080 0%, #002d4d 100%); /* Darker gradient */
+            color: #ffffff;
+        }
+
+    /* Badge Style for Selected Files */
+    .badge-primary {
+        background-color: #005f99; /* Darker blue */
+    }
+
+    /* Selected Files Box */
+    .selected-files {
+        min-height: 60px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    /* Gradient Text */
+    .text-gradient {
+        background: -webkit-linear-gradient(45deg, #005f99, #003f5f);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom File Input Styling */
+    .custom-file-input:lang(en) ~ .custom-file-label::after {
+        content: "Browse"; /* Change the button text */
+    }
+
+    /* Additional Styles to Match the Masculine Theme */
+    body {
+        background-color: #e0f2f1; /* Light teal background for the entire page */
+        font-family: 'Arial', sans-serif; /* Clean and professional font */
+    }
+
+    h2 {
+        color: #005f99; /* Blue color for the heading */
+    }
+</style>

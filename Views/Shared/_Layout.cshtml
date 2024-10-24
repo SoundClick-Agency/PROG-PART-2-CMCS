@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CMCS</title>
+
+    <!-- Bootstrap and Custom Stylesheets -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CMCS.styles.css" asp-append-version="true" />
+    <style>
+        /* Updated Styles for a Professional and Serious UI */
+        body {
+            background-color: #f8f9fa; /* Light grey background */
+            font-family: Arial, Helvetica, sans-serif; /* Arial for a clean, professional look */
+            color: #343a40; /* Darker text color */
+        }
+
+        .navbar {
+            background-color: #004080; /* Bold navy blue color */
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #ffffff !important;
+            font-size: 1.4rem;
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: #00aaff !important; /* Lighter blue on hover */
+                transform: scale(1.05);
+            }
+
+        .container {
+            margin-top: 40px;
+            background-color: #ffffff; /* Container background */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            color: #004080; /* Bold navy blue for headers */
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+            footer a {
+                color: #00aaff;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    color: #ffffff;
+                    text-decoration: underline;
+                }
+
+                footer p {
+                color: #004080;
+
+                }
+
+        .btn-primary {
+            background-color: #0066cc; /* Professional blue color */
+            border-color: #0066cc;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0055a5; /* Darker blue on hover */
+                border-color: #004080;
+            }
+
+        .submission-message {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #004080;
+            background-color: #e0f0ff; /* Light blue background for messages */
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CMCS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="LecturerClaim" asp-action="Index">Submit Claim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="LecturerClaim" asp-action="TrackClaims">Track Claims</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="ClaimApproval" asp-action="Index">Process Claims</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0">
+                &copy; 2024 Shinsa Lyonga Lomboto - ST10312918. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

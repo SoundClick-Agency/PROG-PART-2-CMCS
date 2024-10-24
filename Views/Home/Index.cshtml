@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid p-0">
+    <div class="row no-gutters">
+        <!-- Main Content -->
+        <div class="col-lg-9 mx-auto">
+            <div class="main-content d-flex align-items-center justify-content-center vh-100 p-5">
+                <div class="card custom-card shadow-lg rounded border-0">
+                    <div class="card-body text-center">
+                        <!-- Introduction Section -->
+                        <div class="mb-5">
+                            <h1 class="display-5 font-weight-bold text-gradient">Welcome to CMCS</h1>
+                            <p class="text-muted">Streamlining your contract claim process efficiently.</p>
+                        </div>
+
+                        <!-- Actions Section -->
+                        <div class="d-flex justify-content-center flex-wrap mt-4">
+                            <a href="@Url.Action("Index", "LecturerClaim")" class="btn btn-primary custom-btn mx-3 my-2">
+                                <i class="fas fa-upload mr-2"></i> Submit Claims
+                            </a>
+                            <a href="@Url.Action("TrackClaims", "LecturerClaim")" class="btn btn-outline-secondary custom-btn mx-3 my-2">
+                                <i class="fas fa-search mr-2"></i> Track Claims
+                            </a>
+                            <a href="@Url.Action("Index", "ClaimApproval")" class="btn btn-success custom-btn mx-3 my-2">
+                                <i class="fas fa-check-circle mr-2"></i> Process Claims
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enhanced Styles -->
+<style>
+    /* Background image for the main content */
+    .main-content {
+        background-image: url('/images/blue-background.jpg'); /* Use a more neutral or blue background image */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* General Styles */
+    body {
+        background-color: #e0f2f1; /* Light teal background for the entire page */
+        font-family: 'Roboto', sans-serif; /* Modern and clean font */
+        color: #2e3d49; /* Dark blue-gray text color */
+    }
+
+    /* Card Styles */
+    .custom-card {
+        padding: 3rem;
+        background: rgba(255, 255, 255, 0.95); /* Slightly transparent white background */
+        border-radius: 12px;
+        max-width: 650px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    }
+
+    /* Button Styles */
+    .custom-btn {
+        border-radius: 8px; /* Slightly rounded buttons */
+        font-size: 1rem;
+        padding: 0.6rem 1.8rem;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Classic blue color */
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+    .btn-outline-secondary {
+        border-color: #5a6b7a; /* Medium gray-blue border */
+        color: #007bff;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #5a6b7a; /* Gray-blue background on hover */
+            color: white;
+        }
+
+    .btn-success {
+        background-color: #28a745; /* Green for success */
+        color: white;
+    }
+
+        .btn-success:hover {
+            background-color: #218838; /* Darker Green */
+        }
+
+    /* Gradient Text */
+    .text-gradient {
+        background: -webkit-linear-gradient(45deg, #1e88e5, #1565c0); /* Gradient from light to darker blue */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Adjusted Font for a bold look */
+    h2 {
+        color: #0d47a1; /* Deep blue color for the heading */
+    }
+
+    /* Shadow Style */
+    .shadow-lg {
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); /* Stronger and more defined shadow */
+    }
+</style>

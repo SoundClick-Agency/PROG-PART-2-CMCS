@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Claim Submission";
+}
+
+<div class="container mt-5">
+    <div class="card text-center shadow-lg rounded border-0" style="background-color: #f0f4f8;">
+        <div class="card-body">
+            <h1 class="font-weight-bold text-gradient">Thank You!</h1>
+            <h5 class="card-title">Your claim has been successfully submitted.</h5>
+            <p class="card-text text-muted">We appreciate your time and effort in submitting the claim.</p>
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "LecturerClaim")" class="btn btn-gradient mx-2">
+                    <i class="fas fa-paper-plane mr-2"></i>Submit Another Claim
+                </a>
+                <a href="@Url.Action("TrackClaims", "LecturerClaim")" class="btn btn-outline-secondary mx-2">
+                    <i class="fas fa-search mr-2"></i>Track Submitted Claims
+                </a>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            Submitted on @DateTime.Now.ToString("MMMM dd, yyyy")
+        </div>
+    </div>
+</div>
+
+<!-- Updated Styles -->
+<style>
+    /* Custom Card Styles */
+    .card {
+        border-radius: 12px; /* Rounded corners for the card */
+        background-color: #f0f4f8; /* Soft gray-blue background */
+        color: #2a3e52; /* Darker blue for text */
+    }
+
+    /* Button Gradient */
+    .btn-gradient {
+        background: linear-gradient(90deg, #2d91c2 0%, #1f456e 100%); /* Blue gradient */
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+        transition: background-color 0.3s ease-in-out;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Slightly bolder shadow */
+    }
+
+        .btn-gradient:hover {
+            background: linear-gradient(90deg, #216a8a 0%, #1c3756 100%); /* Darker blue gradient */
+        }
+
+    /* Outline Button Styles */
+    .btn-outline-secondary {
+        border: 2px solid #2a3e52; /* Dark blue */
+        color: #2a3e52;
+        border-radius: 8px;
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #2a3e52;
+            color: #ffffff;
+        }
+
+    /* Gradient Text */
+    .text-gradient {
+        background: -webkit-linear-gradient(45deg, #1f456e, #2d91c2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Shadow Effect */
+    .shadow-lg {
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+    }
+
+    /* Additional Styles for Text and Body */
+    body {
+        font-family: 'Helvetica Neue', Arial, sans-serif; /* Modern and clean font */
+        background-color: #e3ebf3; /* Light gray-blue background for the entire page */
+    }
+
+    h1, h5 {
+        color: #1f456e; /* Deep blue for headings */
+    }
+</style>
